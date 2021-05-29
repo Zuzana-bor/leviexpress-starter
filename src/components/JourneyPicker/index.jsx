@@ -62,6 +62,11 @@ export const JourneyPicker = ({ onJourneyChange }) => {
     setDate(event.target.value);
   };
 
+  const handleSpojSubmit = (event) => {
+    event.prevetDefault();
+    onJourneyChange(fromCity, toCity, date);
+  };
+
   return (
     <div className="journey-picker container">
       <h2 className="journey-picker__head">Kam chcete jet?</h2>
@@ -86,7 +91,12 @@ export const JourneyPicker = ({ onJourneyChange }) => {
             </select>
           </label>
           <div className="journey-picker__controls">
-            <button className="btn" type="submit">
+            <button
+              className="btn"
+              type="submit"
+              onSubmit={handleSpojSubmit}
+              disabled={toCity === '' || fromCity === '' || date === ''}
+            >
               Vyhledat spoj
             </button>
           </div>
